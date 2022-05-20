@@ -1,0 +1,5 @@
+Carmem 3500.00 23
+Lucila 2890.45 42
+Vera 6800.00 51
+Luis 9300.50 55
+Benjamin 12000.00 38

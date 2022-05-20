@@ -1,0 +1,4 @@
+Maria 8 8 10 
+Jose 6 6.3 8 
+Camila 7 9.5 7.5 
+Pedro 10 10 10
