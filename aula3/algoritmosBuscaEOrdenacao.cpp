@@ -1,10 +1,11 @@
-#define TF 500000   // tamanho do vetor
+#define TF 500000 // tamanho do vetor
 #define MAX 9999 // maximo elemento gerado randomicamente dentro do vetor
 
 #include <stdbool.h> // para usar variaveis booleanas
 #include <time.h>  // calcular a diferença do tempo inicial e final
 #include <stdlib.h> // pra usar a funcao RAND()
 #include <stdio.h>
+
 void cria(int vetor[TF]){
 	for (int i=0;i<TF;i++){
 		vetor[i]= rand() % MAX;
@@ -19,36 +20,35 @@ void exibe(int vetor[TF]){
 }
 
 void Bolha(int vetor[TF]){
-	 int i;
-      int  tam;
-      tam = TF-1;
-      while ( tam > 1)  {
-         for (i=0; i<tam; i++)    {
-            if (vetor[i]>vetor[i+1])  {
-               int aux=vetor[i];
-               vetor[i]=vetor[i+1];
-               vetor[i+1]=aux;
-            }
-         }
-         tam=tam-1;
-      }
+	int i = 0, j;
+	while(i < TF) {
+		for(j = 0; j < TF ; j++) {
+			if(vetor[j] >  vetor[j + 1]){
+				int aux =  vetor[j + 1];
+				vetor[j + 1] = vetor[j];
+				vetor[j] = aux;
+			}
+		}
+		i++;
+	}
 }
 void selecao(int vetor[],int tl) 
 { 
- int i, j, menor, posmenor; 
- for (i=0;i<tl-1;i++) { 
-	menor=vetor[i]; 
-	posmenor=i; 
- for(j=i+1;j<tl;j++) 
- 		if(vetor[j]<menor) 
-		 { 
-			menor=vetor[j]; 
-			posmenor=j; 
- 		} 
-	vetor[posmenor]=vetor[i]; 
-	vetor[i]=menor; 
- } 
- }
+	int i, j, seta, seta_pos;
+	for( i = 0; i < TF; i++) {
+		seta = vetor[i];
+		seta_pos = i;
+		for(j = i+1; j < TF; j++) {
+			if(vetor[j]<seta) 
+			{ 
+				seta=vetor[j]; 
+				seta_pos=j; 
+			} 
+		}
+		vetor[seta_pos]=vetor[i]; 
+ 		vetor[i]=seta; 
+	}
+}
 
 
 int  buscaExaustiva (int vetor[TF], int elem)   { // vetor DESORdenado
@@ -133,6 +133,8 @@ int aux, i, j, n, posi;
          vetor[posi]=aux;
       }  	
 }
+//merge sort
+
 main(){
 	int tl=0;
 	int vetor[TF];
@@ -148,10 +150,11 @@ main(){
 		printf("\n4 - Selecao - Ordena o vetor");
 		printf("\n5 - Insercao direta que usa a busca sequencial");
 		printf("\n6 - insercao binaria que usa a busca binaria");
-		printf("\n7 - Busca Exaustiva de um elemento no vetor desordenado");
-		printf("\n8 - Busca Sequencial num vetor Ordenado");
-		printf("\n9 - Busca Binaria num vetor Ordenado");
-		printf("\n10 - Busca Binaria Recursiva num vetor Ordenado");
+		printf("\n7 - Merge Sort");
+		printf("\n8 - Busca Exaustiva de um elemento no vetor desordenado");
+		printf("\n9 - Busca Sequencial num vetor Ordenado");
+		printf("\n10 - Busca Binaria num vetor Ordenado");
+		printf("\n11 - Busca Binaria Recursiva num vetor Ordenado");
 		printf("\n-1 - Sair");
 		printf("\nEntre com a opcao: ");
 		scanf("%d",&opcao);
@@ -192,7 +195,14 @@ main(){
 			        printf("\n ordenou vetor e demorou %f num vetor de %d elementos",diferenca, TF);
 			        ordenado=true;
 						break;
-			case 7: printf("\n Exaustiva. Entre com o valor a ser procurado: ");
+			case 7:tempoi = time(NULL); // obtem o tempo inicial para cronometrar
+			        mergeSort(vetor, 0, TF-1);
+			        tempof = time(NULL);
+			        diferenca = difftime(tempof, tempoi);
+			        printf("\n ordenou vetor e demorou %f num vetor de %d elementos",diferenca, TF);
+			        ordenado=true;
+						break;
+			case 8: printf("\n Exaustiva. Entre com o valor a ser procurado: ");
 			        scanf("%d",&elem);
 			        // tempoi
 					posicao = buscaExaustiva(vetor,elem);
@@ -202,7 +212,7 @@ main(){
 					   printf("\n NAO encontrou e demorou %f num vetor de %d elementos", diferenca, TF);
 					   else printf("\n Demorou %f no vetor de %d elementos e encontrou na posicao vetor[%d]=%d",diferenca,TF, posicao,vetor[posicao]);
 					break;
-			case 8: printf("\n SEQUENCIAL exige vetor ORDENADO!!! \n Entre com o valor a ser procurado: ");
+			case 9: printf("\n SEQUENCIAL exige vetor ORDENADO!!! \n Entre com o valor a ser procurado: ");
 			        scanf("%d",&elem);
 			        if (ordenado){
 			        tempoi = time(NULL);	
@@ -215,7 +225,7 @@ main(){
 				    } 
 					else printf("Vetor NAO esta ordenado \n\n");
 					break;
-			case 9: printf("\n BINARIA exige vetor ORDENADO!!! \n Entre com o valor a sere procurado: ");
+			case 10: printf("\n BINARIA exige vetor ORDENADO!!! \n Entre com o valor a sere procurado: ");
 			        scanf("%d",&elem);
 			        if (ordenado){
                       // obter o tempo inicial
@@ -228,7 +238,7 @@ main(){
 				    } else 
 					    printf("Vetor NAO esta ordenado \n\n");
 					break;	
-			case 10: printf("\n BINARIA RECURSIVA exige vetor ORDENADO");
+			case 11: printf("\n BINARIA RECURSIVA exige vetor ORDENADO");
 			  		scanf("%d",&elem);
 			        if (ordenado){
 			        	// tempo inicial
