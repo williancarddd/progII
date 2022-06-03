@@ -135,27 +135,27 @@ int aux, i, j, n, posi;
 }
 //quicksort
 void quicksort(int vetor[], int inicio, int fim) {
-int i, j, pivo, aux;
-		i = inicio;
-		j = fim;
-		pivo = vetor[(inicio + fim) / 2];
-		while (i <= j) {
-				while (vetor[i] < pivo)
-						i++;
-				while (vetor[j] > pivo)
-						j--;
-				if (i <= j) {
-						aux = vetor[i];
-						vetor[i] = vetor[j];
-						vetor[j] = aux;
-						i++;
-						j--;
-				}
-		}
-		if (inicio < j)
-				quicksort(vetor, inicio, j);
-		if (i < fim)
-				quicksort(vetor, i, fim);
+	int i, j, pivo, aux;
+	i = inicio;
+	j = fim;
+	pivo = vetor[(inicio + fim) / 2];
+	while (i <= j) {
+			while (vetor[i] < pivo)
+					i++;
+			while (vetor[j] > pivo)
+					j--;
+			if (i <= j) {
+					aux = vetor[i];
+					vetor[i] = vetor[j];
+					vetor[j] = aux;
+					i++;
+					j--;
+			}
+	}
+	if (inicio < j)
+			quicksort(vetor, inicio, j);
+	if (i < fim)
+			quicksort(vetor, i, fim);
 }
 
 //heapSort
@@ -292,17 +292,17 @@ main(){
 			        printf("\n ordenou vetor e demorou %f num vetor de %d elementos",diferenca, TF);
 			        ordenado=true;
 						break;
-			case 7:tempoi = time(NULL); // obtem o tempo inicial para cronometrar
+			case 7:tempoi = clock(); // obtem o tempo inicial para cronometrar
 			        quicksort(vetor, 0, TF-1);
-			        tempof = time(NULL);
-			        diferenca = difftime(tempof, tempoi);
+			        tempof = clock();
+			        diferenca = 1000*(double)((tempof - tempoi)/(double)(CLOCKS_PER_SEC));
 			        printf("\n ordenou vetor e demorou %f num vetor de %d elementos",diferenca, TF);
 			        ordenado=true;
 						break;
-			case 8:tempoi = time(NULL); // obtem o tempo inicial para cronometrar
+			case 8:tempoi = clock(); // obtem o tempo inicial para cronometrar
 						heapsort(vetor, TF-1);
-						tempof = time(NULL);
-						diferenca = difftime(tempof, tempoi);
+						tempof = clock();
+						 diferenca = 1000*(double)((tempof - tempoi)/(double)(CLOCKS_PER_SEC));
 						printf("\n ordenou vetor e demorou %f num vetor de %d elementos",diferenca, TF);
 						ordenado=true;
 					break;
